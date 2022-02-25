@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap');
+
+
+.card{
+    background-color: transparent !important;
+    border-radius: 5px !important;
+    border: 2px solid !important;
+}
+/* .card-body{
+    border-radius: 5px !important;
+    border-color: red !important;
+} */
+.card-title{
+    padding: 10%;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 40px;
+    ;
+}
+.btn{
+    border-color: black !important;
+    color: black !important;
+}
+.btn:hover{
+    color:white !important;
+    background-color: black !important;
+}
