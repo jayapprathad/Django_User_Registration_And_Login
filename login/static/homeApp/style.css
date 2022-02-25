@@ -14,7 +14,6 @@
     padding: 10%;
     font-family: 'Source Code Pro', monospace;
     font-size: 40px;
-    ;
 }
 .btn{
     border-color: black !important;
@@ -23,4 +22,10 @@
 .btn:hover{
     color:white !important;
     background-color: black !important;
+}
+.btn-outline-success:focus .btn:focus{
+    box-shadow: grey !important;
+}
+.btn-check:focus+.btn-outline-success, .btn-outline-success:focus{
+    box-shadow: none !important;
 }
