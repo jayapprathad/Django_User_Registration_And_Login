@@ -1,1 +1,25 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap'); */
+body{
+    background:url("homeBg.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    box-sizing: border-box;
+    min-height: 100%;
+}
+.card{
+    background-color: transparent !important;
+    padding: 3%;
+    box-shadow: 4px 3px grey;
+    border-radius: 0.75rem !important;
+    background-color: rgb(235,235,235) !important;
+}
+
+.btn{
+    margin: 2px !important;
+    border-color: black !important;
+    color: black !important;
+}
+.btn:hover{
+    color:white !important;
+    background-color: rgb(62,86,36) !important;
+}
