@@ -1,30 +1,74 @@
 {% extends 'signupApp/base.html' %}
 {% block content %}
 
-<div class="container">
-    <p class="fs-1 text-center">Sign Up</p>
-</div>
+<div class = "container">
+  <div class = "p-4 m-4">
+      <div class = "col-lg-5 mx-auto border rounded pt-4">
+          <h3 class = "alert alert-light border rounded">Create An Account</h3>
+          <form action="/signupApp/base.html" method="POST">{% csrf_token %}
+              
+              {% if error %}
+              <div class="alert alert-danger" role="alert">
+                  {{error}}
+                
+              </div>
+              {% endif %}
+              
+              
+              
+              <div class="form-group">
+                <label for="">First name</label>
+                <input type="text" 
+                name="Firstname" id="" value="{{values.first_name}}"
+                class="form-control" 
+                placeholder="">
+                
+              </div>
+              
+              <div class="form-group">
+                  <label for="">Last name</label>
+                  <input type="text" 
+                  name="Lastname" id="" value="{{values.last_name}}"
+                  class="form-control" 
+                  placeholder="">
+                  
+              </div>
+                
+              <div class="form-group">
+                  <label for="">Email</label>
+                  <input required type="email" 
+                  name="email" id=""  value="{{values.email}}"
+                  class="form-control" 
+                  placeholder="example@gmail.com">
+                  
+              </div>
+                
+              <div class="form-group">
+                  <label for="">Password</label>
+                  <input type="password" 
+                  name="password" id=""
+                  class="form-control" 
+                  placeholder="********">
+                  
+              </div>
+                
+              <div class="form-group">
+                  <label for="">Phone number</label>
+                  <input type="text" 
+                  name="Phonenumber" id="" value="{{values.phone}}"
+                  class="form-control" 
+                  placeholder="7864532343">
+                  
+              </div>
 
-<form>
-    <div class="mb-3">
-      <label for="email1" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username">
-    </div>
-    <div class="mb-3">
-      <label for="password1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password1">
-    </div>
-    <div class="mb-3">
-        <label for="password2" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password2">
+              <div class = "form-group">
+                    <input class = "btn btn-sm btn-info" type = "submit" value ="Create An Account">
+              </div>
+              
+          </form>
+          
+          </h3>
       </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-
+  </div>
+</div>
 {% endblock %}

@@ -10,3 +10,5 @@ class TokenGenerator(PasswordResetTokenGenerator):
 
 
 generate_token = TokenGenerator()
+
+

@@ -3,16 +3,20 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode
-from login.tokens import generate_token
+from .tokens import generate_token
 from .models import Customer
 from django.contrib.auth.hashers import make_password, check_password
-from login import settings
+from django.conf import settings
 from django.core.mail import send_mail, EmailMessage
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 
 # Create your views here.
+def index(request):
+    return render(request, 'signupApp/index.html')
+
+
 def validatecustomer(customer):
     error_message = None
     if not customer.first_name:
