@@ -3,6 +3,14 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode
+
+from loginApp.views import signin
+
+
+
+
+
+#from login.loginApp.views import login
 from .tokens import generate_token
 from .models import Customer
 from django.contrib.auth.hashers import make_password, check_password
@@ -13,9 +21,6 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 
 # Create your views here.
-def index(request):
-    return render(request, 'signupApp/index.html')
-
 
 def validatecustomer(customer):
     error_message = None
@@ -40,16 +45,17 @@ def validatecustomer(customer):
     return error_message
 
 def registeruser(request):
-    first_name = request.POST.get('Firstname')
-    last_name = request.POST.get('Lastname')
-    phone = request.POST.get('Phonenumber')
-    email = request.POST.get('email')
-    password = request.POST.get('password')
+    if request.method=="GET":
+        first_name = request.POST.get('Firstname')
+        last_name = request.POST.get('Lastname')
+        phone = request.POST.get('Phonenumber')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
 
-    value = {'first_name': first_name, 'last_name': last_name, 'phone': phone, 'email': email}
-    error_message = None
-    customer = Customer(first_name=first_name, last_name=last_name, email=email, password=password, phone=phone)
-    error_message = validatecustomer(customer)
+        value = {'first_name': first_name, 'last_name': last_name, 'phone': phone, 'email': email}
+        error_message = None
+        customer = Customer(first_name=first_name, last_name=last_name, email=email, password=password, phone=phone)
+        error_message = validatecustomer(customer)
 
     #saving
 
@@ -88,7 +94,7 @@ def registeruser(request):
         email.fail_silently = True
         email.send()
 
-        return redirect('homeApp/index.html')
+        return redirect('loginApp/index.html')
     else:
         data = {'error': error_message, 'values': value}
         return render(request, 'signupApp/index.html', data)
@@ -96,7 +102,7 @@ def registeruser(request):
 
 def signup(request):
     if request.method == 'GET':
-        return render(request, 'signupApp/index.html')
+       return render(request, 'signupApp/index.html')
     else:
         return registeruser(request)
 
@@ -110,7 +116,7 @@ def activate(request, uidb64, token):
     if customer is not None and generate_token.check_token(customer, token):
         customer.is_active = True 
         customer.save()
-        login(request, customer)
+        signin(request, customer)
         return redirect('homeApp/index.html')
     else:
         return render(request, 'activation_failed.html')
