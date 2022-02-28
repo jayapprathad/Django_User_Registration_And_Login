@@ -1,4 +1,4 @@
-{ % extends 'base.html' %}
+
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -30,11 +30,11 @@
         <!--<h4>succusful login</h4> Alternative available in Messages--> 
         <button type="submit"> <a href="/signout"> SignOut </a> </button>
         
-        {% else %}
+        <!-- {% else %} 
         <h3>Hello {{ uname }}</h3>
-        <!--<h4>unsuccusful login</h4>Alternative available in Messages--> 
+        <!--<h4>unsuccusful login</h4>Alternative available in Messages
         <button type="submit"> <a href="/signup"> SignUp </a> </button> 
-        <button type="submit"> <a href="/signin"> SignIn </a> </button>
+        <button type="submit"> <a href="/signin"> SignIn </a> </button>-->
 
         {% endif %}
         
