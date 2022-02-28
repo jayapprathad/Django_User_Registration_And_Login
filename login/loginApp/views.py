@@ -2,6 +2,7 @@ from imaplib import _Authenticator
 from pyexpat.errors import messages
 from django.shortcuts import redirect, render
 
+
 # Create your views here.
 
 def signin(request):
@@ -14,16 +15,19 @@ def signin(request):
         if user is not None:
             signin(request, user)
             uname = user.username
-            # messages.success(request, "Logged In Sucessfully!!")
+            messages.success(request, "Logged In Sucessfully!!")
             #return render(request, "authentication/index.html",{"fname":fname})
             return render(request, "loginApp/check.html",{'uname':uname})
-        else:
+            #return render(request, "homeApp/index.html",{'uname':uname})
+            #return render(request, "loginApp/index.html")
 
-            messages="pls check your credentials"
-            #messages.error(request,"Please check your Username or Password")
-            return render(request,"loginApp/index.html",{'error':messages})
-            #messages.error(request, "Bad Credentials!!")
+        else:
+            uname = user.username
+            messages.error(request,"Please check your Username or Password!!")   
             #return redirect('home')
+            #return render(request,"homeApp/index.html")
+            return render(request, "loginApp/check.html",{'uname':uname})
+            #return render(request, "loginApp/index.html")
     
     return render(request, "loginApp/index.html")
 
