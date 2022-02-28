@@ -22,6 +22,6 @@ from signupApp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('homeApp.urls')),
-    path('loginApp/', include('loginApp.urls')),
+    path('loginApp/', include(('loginApp.urls','loginApp'),namespace='loginApp')),
     path('signupApp/', include('signupApp.urls'))
 ]

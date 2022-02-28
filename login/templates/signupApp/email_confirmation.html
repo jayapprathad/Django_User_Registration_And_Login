@@ -6,6 +6,6 @@ hello {{ name }}!
 
 please confirm your email by clicking on the following link.
 
-confirmation link: http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+confirmation link: http://{{ domain }}{% url 'signupApp:activate' uidb64=uid token=token %}
 
 {% endautoescape %}
