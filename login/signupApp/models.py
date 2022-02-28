@@ -1,17 +1,27 @@
+#from typing_extensions import Self
 from django.db import models
+
 
 # Create your models here.
 class Customer(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    phone = models.CharField(max_length=15)
+    name = models.CharField(max_length=50)
+    username = models.CharField(max_length=50)
     email = models.EmailField()
-    password = models.CharField(max_length=500)
+    pass1 = models.CharField(max_length=500)
+    pass2 = models.CharField(max_length=500, default=pass1)
+    phonenumber =  models.CharField(max_length=15)
 
     def register(self):
         self.save()
 
-    def isExists(self):
+    def usernameisExist(self):
+         if Customer.objects.filter(username=self.username).exists():
+            return True
+         else:
+            return False
+
+
+    def mailisExist(self):
         if Customer.objects.filter(email=self.email):
             return True
         else:
