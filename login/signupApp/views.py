@@ -14,8 +14,7 @@ from . tokens import generate_token
 from django.http import HttpResponseRedirect
 from .models import Customer
 
- 
-# Create your views here.
+ # Create your views here.
 
 def signup(request):
     if request.method == "POST":

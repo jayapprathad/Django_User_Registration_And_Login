@@ -21,8 +21,6 @@ class Customer(models.Model):
             return False
 
 
-        
-
     def mailisExist(self):
         if Customer.objects.filter(email=self.email):
             return True
