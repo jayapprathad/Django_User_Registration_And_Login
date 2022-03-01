@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy&display=swap');
+
+.gradient-custom-3 {
+    background:url("index.jpg");
+    background-size: cover;
+    /* background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+    background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5)) */
+  }
+
+.head{
+  font-family: 'Sorts Mill Goudy', serif;
+  color: rgb(34,80,44) !important;
+}
+.btn.btn-success{
+  border-color: black !important;
+  color: black !important;
+  background-color: transparent !important;
+}
+.btn.btn-success:hover{
+  color:white !important;
+  background-color: rgb(34,80,44) !important;
+}
+.card{
+  margin-top: 20%;
+  background-color: white !important;
+}
+input{
+  background-color:whitesmoke !important;
+}
