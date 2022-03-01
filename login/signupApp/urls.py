@@ -5,6 +5,6 @@ app_name='signupApp'
 
 urlpatterns = [
     path('index.html/', views.signup, name='signup'),
-    #path('activate/<uidb64>/<token>', views.activate, name='activate'),
+    path('activate/<uidb64>/<token>', views.activate, name='activate'),
 
 ]

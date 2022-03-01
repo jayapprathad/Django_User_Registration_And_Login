@@ -20,20 +20,24 @@ from .models import Customer
 def signup(request):
     if request.method == 'POST':
         
-        name = request.POST.get('name')
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
         username = request.POST.get('username')
         email = request.POST.get('email')
         pass1 = request.POST.get('pass1')
-        pass2 = request.POST.get('pass2')
-        phonenumber = request.POST.get('phonenumber')
+        # pass2 = request.POST.get('pass2')
+        # phonenumber = request.POST.get('phonenumber')
         #myuser= User.objects.create_user(username, email, pass1)      #myuser is a variable , User is a model
-        myuser= User.objects.create_user(username,email,pass1,pass2,phonenumber) 
-        # myuser.email=email
+        myuser= User.objects.create_user(username=username) 
+        myuser.password=pass1
+        myuser.email=email
+        myuser.first_name=fname
+        myuser.last_name=lname
         # myuser.password=pass1
         # myuser.password2=pass2
         # myuser.name = name
         # myuser.phonenumber = phonenumber
-        # myuser.save()
+        myuser.save()
         '''
         myuser = Customer(name=name, username=username, email=email,
                           pass1=pass1, pass2=pass2, phonenumber=phonenumber)
@@ -64,14 +68,14 @@ def signup(request):
         #myuser.name = name
         #myuser.phonenumber = phonenumber
         #myuser.is_active = False
-        '''
+        
         messages.success(
             request, "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
         
         # Welcome Email
         subject = "Welcome to our website!!"
         
-        message = "Hello " + myuser.name + "!! \n" + \
+        message = "Hello " + myuser.first_name + "!! \n" + \
          "Welcome! \nThank you for visiting our website\n. We have also sent you a confirmation email, please confirm your email address. \n\nThanking You"
         
         from_email = settings.EMAIL_HOST_USER
@@ -83,7 +87,7 @@ def signup(request):
         current_site = get_current_site(request)
         email_subject = "Confirm your Email - Django Login!!"
         message2 = render_to_string('signupApp/email_confirmation.html', {
-            'name': myuser.name,
+            'name': myuser.first_name,
             'domain': current_site.domain,
             'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
             'token': generate_token.make_token(myuser)
@@ -96,7 +100,7 @@ def signup(request):
             [myuser.email],
         )
         email.fail_silently = True
-        email.send()'''
+        email.send()
         return render(request, 'loginApp/index.html')
     return render(request, 'signupApp/index.html')
 
