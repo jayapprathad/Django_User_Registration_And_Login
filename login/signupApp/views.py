@@ -25,18 +25,12 @@ def signup(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
         pass1 = request.POST.get('pass1')
-        # pass2 = request.POST.get('pass2')
-        # phonenumber = request.POST.get('phonenumber')
-        #myuser= User.objects.create_user(username, email, pass1)      #myuser is a variable , User is a model
+        pass2 = request.POST.get('pass2')
         myuser= User.objects.create_user(username=username) 
         myuser.password=pass1
         myuser.email=email
         myuser.first_name=fname
         myuser.last_name=lname
-        # myuser.password=pass1
-        # myuser.password2=pass2
-        # myuser.name = name
-        # myuser.phonenumber = phonenumber
         myuser.save()
         '''
         myuser = Customer(name=name, username=username, email=email,
@@ -61,13 +55,6 @@ def signup(request):
              return HttpResponseRedirect(request.path_info)
 
         else:'''
-
-        #myuser = Customer.objects.create_user(username=username)
-        # myuser.email=email
-        # myuser.password=pass1
-        #myuser.name = name
-        #myuser.phonenumber = phonenumber
-        #myuser.is_active = False
         
         messages.success(
             request, "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
@@ -101,8 +88,9 @@ def signup(request):
         )
         email.fail_silently = True
         email.send()
-        return render(request, 'loginApp/index.html')
+        return redirect('loginApp:login')
     return render(request, 'signupApp/index.html')
+
 
 
 def activate(request, uidb64, token):
