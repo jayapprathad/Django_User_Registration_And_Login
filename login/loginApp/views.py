@@ -29,7 +29,7 @@ def signin(request):
             login(request, user1)
             uname = user1.username
             print(uname)
-            #messages.success(request, "Logged In Sucessfully!!")
+            messages.success(request, "Logged In Sucessfully!!")
             #return render(request, "authentication/index.html",{"fname":fname})
             return render(request, "loginApp/check.html",{'uname':uname})
             #return render(request, "homeApp/index.html",{'uname':uname})
@@ -37,11 +37,11 @@ def signin(request):
 
         else:
             print("checking")
-            messages.error(request,"Please check your Username or Password!!")   
+            #messages.error(request,"Please check your Username or Password!!")   
             #return redirect('home')
             #return render(request,"homeApp/index.html")
-            return render(request, "loginApp/check.html")
-            #return render(request, "loginApp/test.html")
+            #return render(request, "loginApp/check.html")
+            return render(request, "loginApp/test.html")
             #return render(request, "loginApp/index.html")
     
     return render(request, "loginApp/index.html")

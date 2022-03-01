@@ -11,7 +11,7 @@ class Customer(models.Model):
     pass2 = models.CharField(max_length=500, default=pass1)
     phonenumber =  models.CharField(max_length=15)
 
-    def register(self):
+    '''def register(self):
         self.save()
 
     def usernameisExist(self):
@@ -32,7 +32,7 @@ class Customer(models.Model):
         try:
            return Customer.objects.get(email=email)
         except:
-           return False
+           return False'''
 
 
 
