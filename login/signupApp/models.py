@@ -10,7 +10,7 @@ class Customer(models.Model):
     email = models.EmailField(null=True, max_length=255)
     pass1 = models.CharField(null=True, max_length=500)
     pass2 = models.CharField(null=True, max_length=500, default=pass1)
-    
+
     def register(self):
         self.save()
 
@@ -42,7 +42,9 @@ class Customer(models.Model):
         except:
             return False
 
-    
-
-
-
+    # @staticmethod
+    # def get_customer_by_password(password):
+    #     try:
+    #         return Customer.objects.get(pass1=password)
+    #     except:
+    #         return False

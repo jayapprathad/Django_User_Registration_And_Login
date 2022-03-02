@@ -1,5 +1,4 @@
 #from imaplib import _Authenticator
-from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from signupApp.models import Customer
@@ -13,18 +12,21 @@ def signin(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         customer = Customer.get_customer_by_username(username)
+        #customer = Customer.get_customer_by_password(password)
         error_message = None
         if customer:
-            flag = check_password(password, customer.password)
+            flag = check_password(password, customer.pass1)
             if flag:
-                return redirect('loginApp/check.html')
+                return render(request,'loginApp/check.html',{'uname':customer.username})
             else:
                 error_message = 'username or password invalid !!'
-                return redirect('loginApp/test.html', {'error': error_message})
+                return render(request,'loginApp/test.html', {'error': error_message})
 
         else:
             error_message = 'username not exist!!'
-
+            return render(request,'loginApp/test.html', {'error': error_message})
+    else:
+        return render(request,'loginApp/index.html')
 
 
 

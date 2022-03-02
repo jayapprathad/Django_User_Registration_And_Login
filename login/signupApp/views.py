@@ -1,5 +1,4 @@
 #from typing_extensions import Self
-from django.urls import reverse
 from login import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
@@ -20,7 +19,6 @@ from django.contrib.auth.hashers import make_password, check_password
 
 def signup(request):
     if request.method == 'POST':
-
         fname = request.POST.get('fname')
         lname = request.POST.get('lname')
         username = request.POST.get('username')
@@ -57,7 +55,6 @@ def signup(request):
             return HttpResponseRedirect(request.path_info)
 
         else:
-
             myuser.is_active = False
             myuser.pass1 = myuser.pass2 = make_password(myuser.pass1)
             myuser.register()
@@ -96,7 +93,6 @@ def signup(request):
         email.send()
         return render(request, 'loginApp/index.html')
     else:
-
         return render(request, 'signupApp/index.html')
 
 
