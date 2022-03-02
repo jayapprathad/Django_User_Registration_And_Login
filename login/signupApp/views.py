@@ -25,22 +25,9 @@ def signup(request):
         email = request.POST.get('email')
         pass1 = request.POST.get('pass1')
         pass2 = request.POST.get('pass2')
-        #phonenumber=request.POST.get('phonenumber')
-        #myuser= User.objects.create_user(username=username) 
-        #myuser.password=pass1
-        #myuser.email=email
-        #myuser.first_name=fname
-        #myuser.last_name=lname
-        #myuser.save()
 
         myuser = Customer(fname=fname, lname=lname, username=username, email=email,
                           pass1=pass1, pass2=pass2)
-
-
-        #change made here
-
-        #print(myuser.fname, myuser.email)
-        #change end here
 
         if myuser.usernameisExist():
             messages.error(request, "Username Already Registered!!")
@@ -50,13 +37,13 @@ def signup(request):
             messages.error(request, "Email Already Registered!!")
             return HttpResponseRedirect(request.path_info)
 
-        if pass1 != pass2:
+        if myuser.pass1 != myuser.pass2:
             messages.error(request, "Passwords didn't matched!!")
             return HttpResponseRedirect(request.path_info)
 
         else:
+            #myuser.pass1 = myuser.pass2 = make_password(myuser.pass1)
             myuser.is_active = False
-            myuser.pass1 = myuser.pass2 = make_password(myuser.pass1)
             myuser.register()
 
             messages.success(
@@ -91,7 +78,7 @@ def signup(request):
         )
         email.fail_silently = True
         email.send()
-        return render(request, 'loginApp/index.html')
+        return redirect('homepage')
     else:
         return render(request, 'signupApp/index.html')
 
