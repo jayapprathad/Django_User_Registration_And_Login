@@ -1,0 +1,13 @@
+body {
+    background:url("index.jpg");
+    background-size: cover;
+  }
+  .btn.btn-success{
+    border-color: black !important;
+    color: black !important;
+    background-color: transparent !important;
+  }
+  .btn.btn-success:hover{
+    color:white !important;
+    background-color: rgb(34,80,44) !important;
+  }

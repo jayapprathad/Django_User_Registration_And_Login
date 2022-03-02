@@ -3,14 +3,12 @@
 
 <body>
 
-{% for message in messages %}
-<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-    <strong>Message:</strong> {{ message }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-{% endfor %}
+  {% for message in messages %}
+  <div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Well done!</h4>
+    <p>{{ message }}</p>
+  </div>
+  {% endfor %}
 
 <div class="card position-absolute top-50 start-50 translate-middle">
     <div class="card-body">
@@ -19,21 +17,5 @@
       <a href="signupApp/index.html" class="card-link"><button type="button" class="btn btn-outline-success">SIGNUP</button></a>
     </div>
   </div>
-
-
-  <!-- change made here -->
-  <!-- {% for message in messages %} 
-  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-      <strong>Message:</strong> {{ message }}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-  <span aria-hidden="true">&times;</span>
-</button>
-  </div>
-  {% endfor %}     -->
-
-
-  
-
-
 </body>
 {% endblock %}

@@ -31,7 +31,7 @@ def signup(request):
 
         if myuser.usernameisExist():
             messages.error(request, "Username Already Registered!!")
-            return HttpResponseRedirect(request.path_info)
+            return HttpResponseRedirect('#')
 
         if myuser.mailisExist():
             messages.error(request, "Email Already Registered!!")
