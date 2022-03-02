@@ -4,22 +4,23 @@ from django.db import models
 
 # Create your models here.
 class Customer(models.Model):
-    name = models.CharField(max_length=50)
-    username = models.CharField(max_length=50)
-    email = models.EmailField()
-    pass1 = models.CharField(max_length=500)
-    pass2 = models.CharField(max_length=500, default=pass1)
-    phonenumber =  models.CharField(max_length=15)
-
-    '''def register(self):
+    fname = models.CharField(max_length=50, blank=True, null=True)
+    lname = models.CharField(max_length=50, blank=True, null=True)
+    username = models.CharField(null=True, max_length=50)
+    email = models.EmailField(null=True, max_length=255)
+    pass1 = models.CharField(null=True, max_length=500)
+    pass2 = models.CharField(null=True, max_length=500, default=pass1)
+    
+    def register(self):
         self.save()
 
     def usernameisExist(self):
-         if Customer.objects.filter(username=self.username).exists():
+        if Customer.objects.filter(username=self.username):
+            print('true')
             return True
-         else:
+        else:
+            print('false')
             return False
-
 
     def mailisExist(self):
         if Customer.objects.filter(email=self.email):
@@ -30,9 +31,18 @@ class Customer(models.Model):
     @staticmethod
     def get_customer_by_email(email):
         try:
-           return Customer.objects.get(email=email)
+            return Customer.objects.get(email=email)
         except:
-           return False'''
+            return False
+
+    @staticmethod
+    def get_customer_by_username(username):
+        try:
+            return Customer.objects.get(username=username)
+        except:
+            return False
+
+    
 
 
 

@@ -13,72 +13,78 @@ from django.contrib.auth import login
 from . tokens import generate_token
 from django.http import HttpResponseRedirect
 from .models import Customer
+from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
 
 
 def signup(request):
     if request.method == 'POST':
-        
+
         fname = request.POST.get('fname')
         lname = request.POST.get('lname')
         username = request.POST.get('username')
         email = request.POST.get('email')
         pass1 = request.POST.get('pass1')
         pass2 = request.POST.get('pass2')
-        myuser= User.objects.create_user(username=username) 
-        myuser.password=pass1
-        myuser.email=email
-        myuser.first_name=fname
-        myuser.last_name=lname
-        myuser.save()
-        '''
-        myuser = Customer(name=name, username=username, email=email,
-                          pass1=pass1, pass2=pass2, phonenumber=phonenumber)
-        myuser.is_active = False
-        
-        #change made here
+        #phonenumber=request.POST.get('phonenumber')
+        #myuser= User.objects.create_user(username=username) 
+        #myuser.password=pass1
+        #myuser.email=email
+        #myuser.first_name=fname
+        #myuser.last_name=lname
         #myuser.save()
-        print(myuser.name,myuser.email)
-        #change end here'''
 
-        '''if myuser.usernameisExist():
-             messages.error(request, "Username Already Registered!!")
-             return HttpResponseRedirect(request.path_info)
+        myuser = Customer(fname=fname, lname=lname, username=username, email=email,
+                          pass1=pass1, pass2=pass2)
+
+
+        #change made here
+
+        #print(myuser.fname, myuser.email)
+        #change end here
+
+        if myuser.usernameisExist():
+            messages.error(request, "Username Already Registered!!")
+            return HttpResponseRedirect(request.path_info)
 
         if myuser.mailisExist():
-             messages.error(request, "Email Already Registered!!")
-             return HttpResponseRedirect(request.path_info)
-        
+            messages.error(request, "Email Already Registered!!")
+            return HttpResponseRedirect(request.path_info)
+
         if pass1 != pass2:
-             messages.error(request, "Passwords didn't matched!!")
-             return HttpResponseRedirect(request.path_info)
+            messages.error(request, "Passwords didn't matched!!")
+            return HttpResponseRedirect(request.path_info)
 
-        else:'''
-        
-        messages.success(
-            request, "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
-        
-        # Welcome Email
-        subject = "Welcome to our website!!"
-        
-        message = "Hello " + myuser.first_name + "!! \n" + \
-         "Welcome! \nThank you for visiting our website\n. We have also sent you a confirmation email, please confirm your email address. \n\nThanking You"
-        
-        from_email = settings.EMAIL_HOST_USER
-        to_list = [myuser.email]
-        send_mail(subject, message, from_email,
-                  to_list, fail_silently=True)
+        else:
 
-        # Email Address Confirmation Email
-        current_site = get_current_site(request)
-        email_subject = "Confirm your Email - Django Login!!"
-        message2 = render_to_string('signupApp/email_confirmation.html', {
-            'name': myuser.first_name,
-            'domain': current_site.domain,
-            'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
-            'token': generate_token.make_token(myuser)
-        })
+            myuser.is_active = False
+            myuser.pass1 = myuser.pass2 = make_password(myuser.pass1)
+            myuser.register()
+
+            messages.success(
+                request, "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
+
+            # Welcome Email
+            subject = "Welcome to our website!!"
+
+            message = "Hello " + str(myuser.fname) + "!! \n" + \
+                      "Welcome! \nThank you for visiting our website\n. We have also sent you a confirmation email, please confirm your email address. \n\nThanking You"
+
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [myuser.email]
+            send_mail(subject, message, from_email,
+                      to_list, fail_silently=True)
+
+            # Email Address Confirmation Email
+            current_site = get_current_site(request)
+            email_subject = "Confirm your Email - Django Login!!"
+            message2 = render_to_string('signupApp/email_confirmation.html', {
+                'name': myuser.fname,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
+                'token': generate_token.make_token(myuser)
+            })
 
         email = EmailMessage(
             email_subject,
@@ -88,8 +94,10 @@ def signup(request):
         )
         email.fail_silently = True
         email.send()
-        return redirect('loginApp:login')
-    return render(request, 'signupApp/index.html')
+        return render(request, 'loginApp/index.html')
+    else:
+
+        return render(request, 'signupApp/index.html')
 
 
 
