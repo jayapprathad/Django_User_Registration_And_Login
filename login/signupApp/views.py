@@ -1,12 +1,7 @@
 from login import settings
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
 from django.contrib import messages
-from django.core.mail import EmailMessage, send_mail
-from django.contrib.sites.shortcuts import get_current_site
-from django.template.loader import render_to_string
-from django.utils.encoding import force_bytes, force_str
-from django.contrib.auth import login
+from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from .models import Customer
 
@@ -25,7 +20,7 @@ def signup(request):
         myuser = Customer(fname=fname, lname=lname, username=username, email=email,
                           pass1=pass1, pass2=pass2)
 
-        #validation
+        # validation
 
         if myuser.usernameisExist():
             messages.error(request, "Username Already Registered!!")
@@ -60,6 +55,3 @@ def signup(request):
         return redirect('homepage')
     else:
         return render(request, 'signupApp/index.html')
-
-
-

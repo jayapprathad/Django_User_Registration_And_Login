@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.contrib import messages
 from signupApp.models import Customer
 # Create your views here.
@@ -23,10 +23,3 @@ def signin(request):
         return HttpResponseRedirect('#')
     else:
         return render(request, 'loginApp/index.html')
-
-
-
-
-
-
-   
