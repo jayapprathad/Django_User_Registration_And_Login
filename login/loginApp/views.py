@@ -1,9 +1,7 @@
-#from imaplib import _Authenticator
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from signupApp.models import Customer
-from django.contrib.auth.hashers import make_password, check_password
-
 # Create your views here.
 
 
@@ -16,18 +14,13 @@ def signin(request):
 
         if customer:
             if password == customer.pass1:
-                flag = True
-                return render(request, 'loginApp/check.html', {'uname': customer.username})
+                return render(request, 'loginApp/check.html', {'uname': customer.fname})
             else:
-                flag = False
-                return render(request, 'loginApp/test.html')
+                messages.error(request, "Invalid Username or Password!!")
+                return HttpResponseRedirect('#')
 
-        #if flag:
-            #return render(request, 'loginApp/check.html', {'uname': customer.username})
-
-
-        return render(request, 'loginApp/test.html')
-
+        messages.error(request, "Invalid Username or Password!!")
+        return HttpResponseRedirect('#')
     else:
         return render(request, 'loginApp/index.html')
 

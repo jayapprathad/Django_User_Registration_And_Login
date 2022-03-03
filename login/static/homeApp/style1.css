@@ -9,7 +9,7 @@ body{
 .card{
     background-color: transparent !important;
     padding: 3%;
-    box-shadow: 4px 3px grey;
+    box-shadow: 4px 3px rgb(177, 177, 177);
     border-radius: 0.75rem !important;
     background-color: rgb(235,235,235) !important;
 }

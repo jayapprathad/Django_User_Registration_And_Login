@@ -3,6 +3,9 @@
 .gradient-custom-3 {
     background:url("index.jpg");
     background-size: cover;
+    background-attachment: fixed;
+    box-sizing: border-box;
+    min-height: 100%;
   }
   .head{
     font-family: 'Sorts Mill Goudy', serif;
@@ -16,4 +19,8 @@
   .btn.btn-success:hover{
     color:white !important;
     background-color: rgb(34,80,44) !important;
+  }
+  .card{
+    margin-top: 10%;
+    margin-bottom: 10%;
   }

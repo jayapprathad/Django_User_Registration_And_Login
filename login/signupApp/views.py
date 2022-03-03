@@ -12,7 +12,6 @@ from django.contrib.auth import login
 from . tokens import generate_token
 from django.http import HttpResponseRedirect
 from .models import Customer
-from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
 
@@ -35,14 +34,13 @@ def signup(request):
 
         if myuser.mailisExist():
             messages.error(request, "Email Already Registered!!")
-            return HttpResponseRedirect(request.path_info)
+            return HttpResponseRedirect('#')
 
         if myuser.pass1 != myuser.pass2:
             messages.error(request, "Passwords didn't matched!!")
-            return HttpResponseRedirect(request.path_info)
+            return HttpResponseRedirect('#')
 
         else:
-            #myuser.pass1 = myuser.pass2 = make_password(myuser.pass1)
             myuser.is_active = False
             myuser.register()
 
@@ -53,7 +51,7 @@ def signup(request):
             subject = "Welcome to our website!!"
 
             message = "Hello " + str(myuser.fname) + "!! \n" + \
-                      "Welcome! \nThank you for visiting our website\n. We have also sent you a confirmation email, please confirm your email address. \n\nThanking You"
+                      "Welcome to our website! \nThank you for visiting us.\n \n\nThanking You\n Team SASTRA"
 
             from_email = settings.EMAIL_HOST_USER
             to_list = [myuser.email]

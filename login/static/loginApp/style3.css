@@ -3,8 +3,9 @@
 .gradient-custom-3 {
     background:url("index.jpg");
     background-size: cover;
-    /* background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
-    background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5)) */
+    background-attachment: fixed;
+    box-sizing: border-box;
+    min-height: 100%;
   }
 
 .head{

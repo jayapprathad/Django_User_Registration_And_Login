@@ -1,6 +1,9 @@
 body {
     background:url("index.jpg");
     background-size: cover;
+    background-attachment: fixed;
+    box-sizing: border-box;
+    min-height: 100%;
   }
   .btn.btn-success{
     border-color: black !important;
