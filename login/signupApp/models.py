@@ -3,12 +3,12 @@ from django.db import models
 
 # Create your models here.
 class Customer(models.Model):
-    fname = models.CharField(max_length=50, blank=True, null=True)
+    fname = models.CharField(max_length=50)
     lname = models.CharField(max_length=50, blank=True, null=True)
     username = models.CharField(null=True, max_length=50)
     email = models.EmailField(null=True, max_length=255)
-    pass1 = models.CharField(null=True, max_length=500)
-    pass2 = models.CharField(null=True, max_length=500, default=pass1)
+    pass1 = models.CharField(null=True, max_length=20)
+    pass2 = models.CharField(null=True, max_length=20, default=pass1)
 
     def register(self):
         self.save()

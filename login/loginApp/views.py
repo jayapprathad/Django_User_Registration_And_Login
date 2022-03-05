@@ -10,7 +10,7 @@ def signin(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         customer = Customer.get_customer_by_email(email)
-        print(customer)
+        #print(customer)
 
         if customer:
             if password == customer.pass1:
