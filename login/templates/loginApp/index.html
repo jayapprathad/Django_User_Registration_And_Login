@@ -15,7 +15,7 @@
                                 {{ message }}
                             </div>
                             {% endfor %}
-                            <form action="" method="POST">
+                            <form action="{% url 'signin' %}" method="POST">
 
                                 {% csrf_token %}
 
@@ -34,11 +34,17 @@
                                     <input required type="password" name="password" class="form-control form-control-lg"
                                         placeholder="Password" />
                                 </div>
+                        
+                                    <br>
+                                    {{form.captcha}}
+                                  <br><br>
                                 <div class="d-flex justify-content-center">
                                     <button type="submit"
                                         class="btn btn-success btn-block btn-lg text-body">Login</button>
                                 </div>
+                            
                             </form>
+                        </div>
                         </div>
                     </div>
                 </div>
