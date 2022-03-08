@@ -3,12 +3,16 @@ from django.db import models
 
 # Create your models here.
 class Customer(models.Model):
-    fname = models.CharField(max_length=50)
+    fname = models.CharField(max_length=50, blank=True, null=True)
     lname = models.CharField(max_length=50, blank=True, null=True)
     username = models.CharField(null=True, max_length=50)
     email = models.EmailField(null=True, max_length=255)
     pass1 = models.CharField(null=True, max_length=20)
-    pass2 = models.CharField(null=True, max_length=20, default=pass1)
+    login_time =  models.DateTimeField(null=True)
+    logout_time = models.DateTimeField(null=True)
+    status =  models.CharField(null=True, max_length=20)
+    verified =  models.CharField(null=True, max_length=20)
+    
 
     def register(self):
         self.save()

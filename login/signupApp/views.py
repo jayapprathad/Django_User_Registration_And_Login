@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from .models import Customer
+from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
 
@@ -18,7 +19,7 @@ def signup(request):
         pass2 = request.POST.get('pass2')
 
         myuser = Customer(fname=fname, lname=lname, username=username, email=email,
-                          pass1=pass1, pass2=pass2)
+                          pass1=pass1)
 
         # validation
 
@@ -30,11 +31,12 @@ def signup(request):
             messages.error(request, "Email Already Registered!!")
             return HttpResponseRedirect('#')
 
-        if myuser.pass1 != myuser.pass2:
+        if pass1 != pass2:
             messages.error(request, "Passwords didn't matched!!")
             return HttpResponseRedirect('#')
 
         else:
+            myuser.pass1 = make_password(myuser.pass1)
             myuser.is_active = False
             myuser.register()
 

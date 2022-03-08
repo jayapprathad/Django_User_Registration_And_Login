@@ -4,6 +4,7 @@ from django.contrib import messages
 from signupApp.models import Customer
 import random 
 from .forms import Myform
+from django.contrib.auth.hashers import make_password, check_password
 # Create your views here.
 
 
@@ -16,9 +17,11 @@ def signin(request):
         customer = Customer.get_customer_by_email(email)
 
         if customer:
+            flag = check_password(password, customer.pass1)
+            
             if not form.is_valid():
                 messages.error(request,"Invalid Captcha")
-            if password == customer.pass1:
+            if flag:
                 return render(request, 'loginApp/check.html', {'uname': customer.fname})
             else:
                 messages.error(request, "Invalid Username or Password!!")
