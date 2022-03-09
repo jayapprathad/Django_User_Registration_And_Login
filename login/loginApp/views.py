@@ -13,32 +13,46 @@ def signin(request):
     form=Myform()
     global email,password,customer
     if request.method == 'POST':
-        
+
         email = request.POST.get('email')
         password = request.POST.get('password')
         #customer
         customer = Customer.get_customer_by_email(email)
 
-        if customer:
-            flag = check_password(password, customer.pass1)
-            
-            if not form.is_valid():
-                messages.error(request,"Invalid Captcha")
-                return HttpResponseRedirect('#')
-            if flag:
-                customer.login_time=datetime.datetime.now() 
-                customer.status="active"
-                customer.save()
-                return render(request, 'loginApp/check.html', {'uname': customer.fname})
-            else:
-                messages.error(request, "Invalid Username or Password!!")
-                return HttpResponseRedirect('#')
+        #verification = customer.is_verified()
+        print(customer.verified)
 
-        messages.error(request, "Invalid Username or Password!!")
-        return HttpResponseRedirect('#')
+        if customer:
+
+            if customer.verified == 'True':
+                print("inside true part")
+                flag = check_password(password, customer.pass1)
+
+                if not form.is_valid():
+                    messages.error(request,"Invalid Captcha")
+                    return HttpResponseRedirect('#')
+                if flag:
+                    customer.login_time=datetime.datetime.now()
+                    customer.status="active"
+                    customer.save()
+                    return render(request, 'loginApp/check.html', {'uname': customer.fname})
+                else:
+                    messages.error(request, "Invalid mail or Password!!")
+                    return HttpResponseRedirect('#')
+            else:
+                print("inside false part")
+                messages.error(request, "User not verified!! Please check your mail and verify!")
+                return HttpResponseRedirect('#')
+        else:
+            messages.error(request, "Invalid mail id")
+            return HttpResponseRedirect('#')
     else:
-        return render(request, 'loginApp/index.html',{"form":form})
-   
+        return render(request, 'loginApp/index.html', {"form": form})
+
+
+
+
+
 def signout(request):
     customer.logout_time=datetime.datetime.now() 
     customer.status="inactive"

@@ -37,3 +37,5 @@ class Customer(models.Model):
         except:
             return False
 
+
+
