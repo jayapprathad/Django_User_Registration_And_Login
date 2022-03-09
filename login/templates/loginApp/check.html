@@ -20,7 +20,7 @@
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Home</a>
-      <form class="d-flex">
+      <form class="d-flex" action="{% url 'signout' %}" method="GET">
         <button class="btn btn-outline-success" type="submit">Sign Out</button>
       </form>
     </div>
