@@ -1,12 +1,12 @@
 {% autoescape off %}
 
-welcome to Django login
+Welcome to Django login
 
-hello {{ name }}!
+Hello {{ name }}!
 
-please confirm your email by clicking on the following link.
+Please confirm your email by clicking on the following link.
 
-confirmation link: http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+Confirmation link: http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
 
 {% endautoescape %}
 

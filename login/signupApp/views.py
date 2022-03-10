@@ -53,7 +53,7 @@ def signup(request):
             subject = "Welcome to our website!!"
 
             message = "Hello " + str(myuser.fname) + "!! \n" + \
-                      "Welcome to our website! \nThank you for visiting us.\n \n\nThanking You\n Team SASTRA"
+                      "Welcome to our website! \nThank you for visiting us.\n \n\nThanking You\n-Team SASTRA"
 
             from_email = settings.EMAIL_HOST_USER
             to_list = [myuser.email]
