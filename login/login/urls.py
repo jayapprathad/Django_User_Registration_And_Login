@@ -25,5 +25,4 @@ urlpatterns = [
     path('signupApp/', include('signupApp.urls')),
     path('captcha/', include('captcha.urls')),
     path('activate/<uidb64>/<token>', views.activate, name="activate"),
-
 ]

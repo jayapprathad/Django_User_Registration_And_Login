@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import Customer
-from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.hashers import make_password
 from django.utils.encoding import force_bytes, force_str
 from .tokens import generate_token
 from loginApp import views
@@ -13,6 +13,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 
 # Create your views here.
+
 
 def signup(request):
     if request.method == 'POST':
@@ -59,8 +60,8 @@ def signup(request):
             send_mail(subject, message, from_email,
                       to_list, fail_silently=True)
 
-            #email confirmation
-            
+            # email confirmation
+
             current_site = get_current_site(request)
             email_subject = "confirm your mail @ AZ django login!!"
             message2 = render_to_string('signupApp/email_confirmation.html', {
@@ -77,11 +78,12 @@ def signup(request):
             )
             email.fail_silently = True
             email.send()
-            
 
             return redirect('homepage')
     else:
         return render(request, 'signupApp/index.html')
+
+# account activation
 
 
 def activate(request, uidb64, token):
@@ -99,4 +101,3 @@ def activate(request, uidb64, token):
 
     else:
         return render(request, 'signupApp/activation_failed.html')
-
